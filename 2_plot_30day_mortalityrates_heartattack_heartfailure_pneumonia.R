@@ -17,11 +17,19 @@ plot_30day_mortalityrates_heartattack_heartfailure_pneumonia = function(){
 	print(paste("Median for heart attack:", median(outcome[,11], na.rm=T)))
 	print(paste("Median for heart failure:", median(outcome[,17], na.rm=T)))
 	print(paste("Median for pneumonia:", median(outcome[,23], na.rm=T)))
-	hist(outcome[, 11], main="Heart Attack", xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
+	print(paste("Mean for heart attack:", mean(outcome[,11], na.rm=T)))
+	print(paste("Mean for heart failure:", mean(outcome[,17], na.rm=T)))
+	print(paste("Mean for pneumonia:", mean(outcome[,23], na.rm=T)))
+	
+	mean_heartattack = mean(outcome[,11], na.rm=T)
+	mean_heartfailure = mean(outcome[,17], na.rm=T)
+	mean_pneumonia = mean(outcome[,23], na.rm=T)
+
+	hist(outcome[, 11], main=substitute(paste("Heart Attack ", bar(X), "=", meha), list(meha = mean_heartattack)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
 	abline(v=median(outcome[,11], na.rm=T))
-	hist(outcome[, 17], main="Heart Failure", xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
+	hist(outcome[, 17], main=substitute(paste("Heart Failure ", bar(X), "=", meha), list(meha = mean_heartfailure)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
 	abline(v=median(outcome[,17], na.rm=T))
-	hist(outcome[, 23], main="Pneumonia", xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
+	hist(outcome[, 23], main=substitute(paste("Heart Pneumonia ", bar(X), "=", meha), list(meha = mean_pneumonia)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
 	abline(v=median(outcome[,23], na.rm=T))
 	
 }
