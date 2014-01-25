@@ -9,8 +9,13 @@ plot_30day_deathrates_by_state = function(){
 	outcome2 = subset(outcome, states_with_more_than_20_hospitals)
 	
 	# basic boxplot of the death rates by state
-	death = outcome2[, 11]
-	state = outcome2$State
+	DF = data.frame(death = outcome2[, 11], state = outcome2$State)
+	print(summary(DF))
+
+	oind = order(as.numeric(by(DF$death, DF$state, median)))
+	print(oind)
+	DF$state = ordered(DF$state, levels=levels(DF$state)[oind])
+	# print(DF)
 	par(las=2)
-	boxplot(death ~ state, ylab = "30-day Death Rate", main = "Heart Attack 30-day Death Rate by State")
+	boxplot(death ~ state, data=DF, ylab = "30-day Death Rate", main = "Heart Attack 30-day Death Rate by State")
 }
