@@ -25,11 +25,14 @@ plot_30day_mortalityrates_heartattack_heartfailure_pneumonia = function(){
 	mean_heartfailure = mean(outcome[,17], na.rm=T)
 	mean_pneumonia = mean(outcome[,23], na.rm=T)
 
-	hist(outcome[, 11], main=substitute(paste("Heart Attack ", bar(X), "=", meha), list(meha = mean_heartattack)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
+	hist(outcome[, 11], prob=T, main=substitute(paste("Heart Attack ", bar(X), "=", meha), list(meha = mean_heartattack)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
 	abline(v=median(outcome[,11], na.rm=T))
-	hist(outcome[, 17], main=substitute(paste("Heart Failure ", bar(X), "=", meha), list(meha = mean_heartfailure)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
+	lines(density(outcome[,11], na.rm=T), col="blue")
+	hist(outcome[, 17], prob=T, main=substitute(paste("Heart Failure ", bar(X), "=", meha), list(meha = mean_heartfailure)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
 	abline(v=median(outcome[,17], na.rm=T))
-	hist(outcome[, 23], main=substitute(paste("Heart Pneumonia ", bar(X), "=", meha), list(meha = mean_pneumonia)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
+	lines(density(outcome[,17], na.rm=T), col="blue")
+	hist(outcome[, 23], prob=T, main=substitute(paste("Heart Pneumonia ", bar(X), "=", meha), list(meha = mean_pneumonia)), xlab="30-day Death Rate", xlim=c(hist_min, hist_max))
 	abline(v=median(outcome[,23], na.rm=T))
+	lines(density(outcome[,23], na.rm=T), col="blue")
 	
 }
