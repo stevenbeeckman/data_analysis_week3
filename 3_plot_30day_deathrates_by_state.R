@@ -3,4 +3,13 @@ plot_30day_deathrates_by_state = function(){
 	# heart attack
 	outcome[, 11] = as.numeric(outcome[, 11])
 	
+	# table() counts the number observations 
+	states_with_more_than_20_hospitals = (table(outcome$State) > 20)
+	states_with_more_than_20_hospitals
+	outcome2 = subset(outcome, states_with_more_than_20_hospitals)
+	
+	# basic boxplot of the death rates by state
+	death = outcome2[, 11]
+	state = outcome2$State
+	boxplot(death ~ state)
 }
