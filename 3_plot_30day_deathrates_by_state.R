@@ -11,5 +11,6 @@ plot_30day_deathrates_by_state = function(){
 	# basic boxplot of the death rates by state
 	death = outcome2[, 11]
 	state = outcome2$State
+	par(las=2)
 	boxplot(death ~ state, ylab = "30-day Death Rate", main = "Heart Attack 30-day Death Rate by State")
 }
