@@ -18,19 +18,28 @@ validate = function(state, outcome){
 }
 
 findHospitalWithLowest30dayDeathRate = function(state, outcome){
-	stateOutcomes = subset(outcomes, State == state)
-	print(str(stateOutcomes))
+	stateOutcomesWithNA = subset(outcomes, State == state)
+	## print(str(stateOutcomesWithNA))
 	if(outcome == "heart attack"){
-		stateOutcomes[,11] = as.numeric(stateOutcomes[,11])
-		print(dim(stateOutcomes[,11]))
-		apply(stateOutcomes[,11], 2, min)
+		stateOutcomes = subset(stateOutcomesWithNA, complete.cases(stateOutcomesWithNA))
+		# print(str(stateOutcomes))
+		minimalOutcomeStates = subset(stateOutcomes, stateOutcomes[,11] == min(stateOutcomes[,11]), select=Hospital.Name)
+		orderedMinimalOutcomeStates = minimalOutcomeStates[order(minimalOutcomeStates),]
+		minimalState = orderedMinimalOutcomeStates[1]
+		minimalState
 	}else if(outcome == "heart failure"){
-		stateOutcomes[,17] = as.numeric(stateOutcomes[,17])
-		print(dim(stateOutcomes[,11]))
-		apply(stateOutcomes[,17], 2, min)
+		stateOutcomes = subset(stateOutcomesWithNA, complete.cases(stateOutcomesWithNA))
+		# print(str(stateOutcomes))
+		minimalOutcomeStates = subset(stateOutcomes, stateOutcomes[,17] == min(stateOutcomes[,17]), select=Hospital.Name)
+		orderedMinimalOutcomeStates = minimalOutcomeStates[order(minimalOutcomeStates),]
+		minimalState = orderedMinimalOutcomeStates[1]
+		minimalState
 	}else if(outcome == "pneumonia"){
-		stateOutcomes[,23] = as.numeric(stateOutcomes[,23])
-		print(dim(stateOutcomes[,11]))
-		apply(stateOutcomes[,23], 2, min)
+		stateOutcomes = subset(stateOutcomesWithNA, complete.cases(stateOutcomesWithNA))
+		# print(str(stateOutcomes))
+		minimalOutcomeStates = subset(stateOutcomes, stateOutcomes[,23] == min(stateOutcomes[,23]), select=Hospital.Name)
+		orderedMinimalOutcomeStates = minimalOutcomeStates[order(minimalOutcomeStates),]
+		minimalState = orderedMinimalOutcomeStates[1]
+		minimalState
 	}
 }
