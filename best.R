@@ -18,5 +18,19 @@ validate = function(state, outcome){
 }
 
 findHospitalWithLowest30dayDeathRate = function(state, outcome){
-	
+	stateOutcomes = subset(outcomes, State == state)
+	print(str(stateOutcomes))
+	if(outcome == "heart attack"){
+		stateOutcomes[,11] = as.numeric(stateOutcomes[,11])
+		print(dim(stateOutcomes[,11]))
+		apply(stateOutcomes[,11], 2, min)
+	}else if(outcome == "heart failure"){
+		stateOutcomes[,17] = as.numeric(stateOutcomes[,17])
+		print(dim(stateOutcomes[,11]))
+		apply(stateOutcomes[,17], 2, min)
+	}else if(outcome == "pneumonia"){
+		stateOutcomes[,23] = as.numeric(stateOutcomes[,23])
+		print(dim(stateOutcomes[,11]))
+		apply(stateOutcomes[,23], 2, min)
+	}
 }
